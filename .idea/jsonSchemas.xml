@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JsonSchemaMappingsProjectConfiguration">
+    <state>
+      <map>
+        <entry key="Liquibase Changelog">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="Liquibase Changelog" />
+              <option name="relativePathToSchema" value="jar://$APPLICATION_HOME_DIR$/plugins/javaee-persistence-impl/lib/javaee-persistence-impl.jar!/com/intellij/persistence/liquibase/liquibase-schema.json" />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="lingualab-data/liquibase/v0.1/v0.1-init-db-changelog.yaml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="lingualab-data/liquibase/db-changelog-master.yaml" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+      </map>
+    </state>
+  </component>
+</project>

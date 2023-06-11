@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      author: le30r
+      id: 0
+      changes:
+        - createTable:
+            tableName: auth
+            columns:
+              - column:
+                  type: bigint
+                  name: id
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_auth
+              - column:
+                  type: varchar(255)
+                  name: login
+              - column:
+                  type: varchar(255)
+                  name: password
+              - column:
+                  type: varchar(64)
+                  name: role

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>xyz.le30r</groupId>
+        <artifactId>lingualab</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>lingualab-data</artifactId>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <database.driver>org.postgresql.Driver</database.driver>
+        <database.url>jdbc:postgresql://localhost:5432/lingualab</database.url>
+        <database.user>admin</database.user>
+        <database.password>password</database.password>
+        <liquibase-maven-plugin.version>4.22.0</liquibase-maven-plugin.version>
+        <postgresql.version>42.6.0</postgresql.version>
+    </properties>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>liquibase</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>${liquibase-maven-plugin.version}</version>
+                    <configuration>
+                        <changeLogFile>liquibase/db-changelog-master.yaml</changeLogFile>
+                        <driver>${database.driver}</driver>
+                        <url>${database.url}</url>
+                        <username>${database.user}</username>
+                        <password>${database.password}</password>
+                        <contexts>default</contexts>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.postgresql</groupId>
+                            <artifactId>postgresql</artifactId>
+                            <version>${postgresql.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
