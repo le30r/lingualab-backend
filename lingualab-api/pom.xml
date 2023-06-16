@@ -17,10 +17,6 @@
 
 <dependencies>
     <dependency>
-        <groupId>org.jetbrains.kotlin</groupId>
-        <artifactId>kotlin-stdlib-jdk8</artifactId>
-    </dependency>
-    <dependency>
         <groupId>io.swagger.core.v3</groupId>
         <artifactId>swagger-annotations</artifactId>
     </dependency>
@@ -56,6 +52,7 @@
                 <version>6.3.0</version>
                 <executions>
                     <execution>
+                        <id>generate</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>

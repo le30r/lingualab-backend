@@ -3,6 +3,7 @@ package xyz.le30r.lingualab.auth.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import xyz.le30r.lingualab.user.User;
 
 import java.util.Objects;
 
@@ -19,9 +20,9 @@ public
 class Auth {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String login;
-    String password;
+    private Long id;
+    private String login;
+    private String password;
     @Enumerated(EnumType.STRING)
     Role role;
 

@@ -33,10 +33,4 @@ public class AuthApiController implements AuthApi {
             return ResponseEntity.created(new URI("/api/v1/user/" + auth.getId())).build();
         }
     }
-
-    @PreAuthorize("#username == authentication.principal.username || hasRole('ADMIN')")
-    @NotNull
-    public ResponseEntity<UserDto> getUser(@NotNull String username) {
-        return ResponseEntity.ok(this.authService.getUser(username));
-    }
 }

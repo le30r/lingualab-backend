@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: user-info
+      author: le30r
+      changes:
+        - addColumn:
+            tableName: auth
+            columns:
+              - column:
+                  name: created_at
+                  type: datetime
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  defaultOnNull: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expires_at
+                  type: datetime
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: user_info
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    unique: true
+                    nullable: false
+                    foreignKeyName: fk_user_info_auth
+                    references: auth(id)
+              - column:
+                  name: name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  type: bigint
+                  name: teacher_id
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_user_teacher
+                    references: user_info(id)
+  - changeSet:
+      id: fix_primary_key
+      author: le30r
+      preConditions:
+        - tableExists:
+            tableName: user_info
+      changes:
+        - addPrimaryKey:
+            tableName: user_info
+            constraintName: pk_user_info
+            columnNames: id

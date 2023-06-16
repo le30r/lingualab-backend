@@ -7,20 +7,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import xyz.le30r.lingualab.auth.entity.Auth;
 import xyz.le30r.lingualab.auth.entity.Role;
-import xyz.le30r.lingualab.auth.mapper.UserMapper;
+import xyz.le30r.lingualab.auth.mapper.AuthMapper;
 import xyz.le30r.lingualab.auth.repository.AuthRepository;
 import xyz.le30r.lingualab.auth.service.AuthService;
+import xyz.le30r.lingualab.dto.AuthDto;
 import xyz.le30r.lingualab.dto.RegisterRequestDto;
-import xyz.le30r.lingualab.dto.UserDto;
-
-import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
 class AuthServiceImpl implements AuthService {
     private final AuthRepository authRepository;
     private final PasswordEncoder passwordEncoder;
-    private final UserMapper userMapper;
+    private final AuthMapper authMapper;
 
     public Auth register(RegisterRequestDto registerRequestDto) {
         final var hashedPassword = passwordEncoder.encode(
@@ -47,8 +45,8 @@ class AuthServiceImpl implements AuthService {
         return authRepository.save(auth);
     }
 
-    public UserDto getUser(String username)
+    public AuthDto getAuth(String username)
     {
-        return userMapper.mapEntityToDto(authRepository.findByLogin(username));
+        return authMapper.mapEntityToDto(authRepository.findByLogin(username));
     }
 }
