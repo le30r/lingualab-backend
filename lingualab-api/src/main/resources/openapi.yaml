@@ -96,8 +96,7 @@ components:
           description: имя
           type: string
         role:
-          type: integer
-          format: int64
+          type: string
         teacher:
           $ref: '#/components/schemas/UserDto'
     PackDto:
