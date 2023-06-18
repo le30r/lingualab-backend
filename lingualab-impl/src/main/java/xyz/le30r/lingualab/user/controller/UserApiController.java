@@ -11,6 +11,7 @@ import xyz.le30r.lingualab.auth.entity.Role;
 import xyz.le30r.lingualab.dto.UserDto;
 import xyz.le30r.lingualab.user.service.UserService;
 
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -42,5 +43,22 @@ public class UserApiController implements UserApi {
         }
         return ResponseEntity.ok(user);
     }
+
+    @Override
+    public ResponseEntity<Void> updateUser(Long id, UserDto userDto) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> createUser(UserDto userDto) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteUser(Long id, OffsetDateTime expiresAt) {
+        return null;
+    }
+
+
 
 }

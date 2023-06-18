@@ -34,9 +34,15 @@
         <scope>provided</scope>
     </dependency>
     <dependency>
+        <groupId>org.apache.avro</groupId>
+        <artifactId>avro</artifactId>
+        <version>${avro.version}</version>
+    </dependency>
+    <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
+
 </dependencies>
 
     <build>
@@ -77,7 +83,33 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>${avro.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-avro-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sourceDirectory>${basedir}/src/main/resources/schema/avro</sourceDirectory>
+                    <!-- Converting CharSequence to Strings -->
+                    <stringType>String</stringType>
+                    <!-- Defining custom logical type and conversions -->
+                    <customConversions>org.apache.avro.Conversions$UUIDConversion</customConversions>
+                    <!-- Linking schemas. Order matters -->
+                    <imports>
+                        <import>${project.basedir}/src/main/resources/schema/avro/event/EventData.avsc</import>
+                        <import>${project.basedir}/src/main/resources/schema/avro/user/event/dto/CreateUserDto.avsc</import>
+                        <import>${project.basedir}/src/main/resources/schema/avro/user/event/CreateUserEvent.avsc</import>
+                    </imports>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

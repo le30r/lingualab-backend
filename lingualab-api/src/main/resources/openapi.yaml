@@ -11,6 +11,12 @@ paths:
       tags:
         - auth
       operationId: register
+      parameters:
+        - in: query
+          name: invite
+          required: false
+          schema:
+            type: string
       requestBody:
         content:
           "application/json":
@@ -37,6 +43,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDto'
+  '/api/v1/user':
+    post:
+      tags:
+        - user
+      operationId: createUser
+      responses:
+        201:
+          description: User created
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/UserDto'
   '/api/v1/user/{id}':
     get:
       tags:
@@ -57,6 +76,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDto'
+    put:
+      tags:
+        - user
+      operationId: updateUser
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+      responses:
+        202:
+          description: Accepted
+
+    delete:
+      tags:
+        - user
+      operationId: deleteUser
+      responses:
+        202:
+          description: Marked as expired
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: expiresAt
+          schema:
+            type: string
+            format: date-time
+
+
 components:
   schemas:
     RegisterRequestDto:
@@ -68,6 +128,9 @@ components:
           type: string
         role:
           type: string
+        expires_at:
+          type: string
+          format: date-time
     AuthDto:
       type: object
       properties:

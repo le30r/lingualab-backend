@@ -17,6 +17,12 @@
                   <Item>
                     <option name="path" value="lingualab-data/liquibase/db-changelog-master.yaml" />
                   </Item>
+                  <Item>
+                    <option name="path" value="lingualab-data/liquibase/v0.1/v0.1-add-invite-table.yaml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="lingualab-data/liquibase/v0.1/v0.1-cumulative-changelog.yaml" />
+                  </Item>
                 </list>
               </option>
             </SchemaInfo>

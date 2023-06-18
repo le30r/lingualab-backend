@@ -1,0 +1,17 @@
+{
+  "type": "record",
+  "namespace": "xyz.le30r.lingualab.event.user.dto",
+  "name": "CreateUserDto",
+  "javaAnnotation": "jakarta.annotation.Generated(\"avro\")",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "invitedBy",
+      "type": ["null", "long"]
+
+    }
+  ]
+}

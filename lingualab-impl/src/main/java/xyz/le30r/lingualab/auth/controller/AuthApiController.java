@@ -24,7 +24,8 @@ public class AuthApiController implements AuthApi {
 
     @SneakyThrows
     @NotNull
-    public ResponseEntity<Void> register(@Nullable RegisterRequestDto registerRequestDto) {
+    @Override
+    public ResponseEntity<Void> register(@Nullable String invite, RegisterRequestDto registerRequestDto) {
 
         if (registerRequestDto == null) {
             throw new HttpMessageNotReadableException("Empty body");

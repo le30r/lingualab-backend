@@ -5,3 +5,6 @@ databaseChangeLog:
   - include:
       file: v0.1-init-user-info.yaml
       relativeToChangelogFile: true
+  - include:
+      file: v0.1-add-invite-table.yaml
+      relativeToChangelogFile: true

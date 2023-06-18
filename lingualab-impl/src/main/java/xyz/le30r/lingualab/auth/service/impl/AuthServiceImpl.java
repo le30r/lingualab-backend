@@ -7,11 +7,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import xyz.le30r.lingualab.auth.entity.Auth;
 import xyz.le30r.lingualab.auth.entity.Role;
+import xyz.le30r.lingualab.auth.event.UserCreatedEvent;
 import xyz.le30r.lingualab.auth.mapper.AuthMapper;
 import xyz.le30r.lingualab.auth.repository.AuthRepository;
 import xyz.le30r.lingualab.auth.service.AuthService;
 import xyz.le30r.lingualab.dto.AuthDto;
 import xyz.le30r.lingualab.dto.RegisterRequestDto;
+
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -40,9 +43,12 @@ class AuthServiceImpl implements AuthService {
                 .login(registerRequestDto.getLogin())
                 .password(hashedPassword)
                 .role(Role.valueOf(registerRequestDto.getRole()))
+                .createdAt(Instant.now())
+                .expiresAt(registerRequestDto.getExpiresAt().toInstant())
                 .build();
+        authRepository.save(auth);
 
-        return authRepository.save(auth);
+        return auth;
     }
 
     public AuthDto getAuth(String username)

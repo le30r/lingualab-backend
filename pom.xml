@@ -28,6 +28,7 @@
         <swagger-annotations.version>2.2.11</swagger-annotations.version>
         <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <avro.version>1.11.1</avro.version>
     </properties>
 
     <dependencyManagement>

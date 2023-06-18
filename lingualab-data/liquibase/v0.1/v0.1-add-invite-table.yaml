@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      author: le30r
+      id: add-invite-table
+      changes:
+        - createTable:
+            tableName: invite
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_invite
+              - column:
+                  name: teacher_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_invite_auth
+                    references: auth(id)
+              - column:
+                  name: created_at
+                  type: datetime
+              - column:
+                  name: expires_at
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: usages
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: link
+                  type: varchar

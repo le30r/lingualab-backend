@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "xyz.le30r.lingualab.event",
+  "name": "EventData",
+  "fields": [
+    {
+      "name": "publishedAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Дата и время события"
+    }
+  ]
+}
