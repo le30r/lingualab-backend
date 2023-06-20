@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "namespace": "xyz.le30r.lingualab.event.user",
+  "namespace": "xyz.le30r.lingualab.user.event",
   "name": "CreateUserEvent",
   "javaAnnotation": "jakarta.annotation.Generated(\"avro\")",
   "fields": [
@@ -14,7 +14,7 @@
     },
     {
       "name": "eventPayload",
-      "type": "xyz.le30r.lingualab.event.user.dto.CreateUserDto"
+      "type": "xyz.le30r.lingualab.user.event.dto.CreateUserDto"
     }
   ]
 }

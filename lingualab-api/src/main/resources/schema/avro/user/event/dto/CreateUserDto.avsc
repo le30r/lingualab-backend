@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "namespace": "xyz.le30r.lingualab.event.user.dto",
+  "namespace": "xyz.le30r.lingualab.user.event.dto",
   "name": "CreateUserDto",
   "javaAnnotation": "jakarta.annotation.Generated(\"avro\")",
   "fields": [

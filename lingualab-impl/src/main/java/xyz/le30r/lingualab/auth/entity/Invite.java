@@ -24,9 +24,4 @@ public class Invite {
     private Instant expiresAt;
     private Integer usages;
     private String link;
-
-
-
-
-
 }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>xyz.le30r</groupId>
+    <artifactId>lingualab</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>lingualab-avro-provision</artifactId>
+
+  <properties>
+    <schema.registry.url>http://localhost:8180</schema.registry.url>
+    <schema.path>${project.basedir}/src/main/resources/schema/avro</schema.path>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.confluent</groupId>
+        <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+        <version>7.3.3</version>
+        <configuration>
+          <compatibilityLevels>
+            <order>FORWARD_TRANSITIVE</order>
+          </compatibilityLevels>
+          <schemaRegistryUrls>
+            <param>${schema.registry.url}</param>
+          </schemaRegistryUrls>
+          <!-- Subject definitions -->
+          <subjects>
+            <xyz.le30r.lingualab.event.EventData>${schema.path}/event/EventData.avsc</xyz.le30r.lingualab.event.EventData>
+            <xyz.le30r.lingualab.user.event.CreateUserEvent>${schema.path}/user/event/CreateUserEvent.avsc</xyz.le30r.lingualab.user.event.CreateUserEvent>
+            <xyz.le30r.lingualab.user.event.dto.CreateUserDto>${schema.path}/user/event/dto/CreateUserDto.avsc</xyz.le30r.lingualab.user.event.dto.CreateUserDto>
+          </subjects>
+          <schemaTypes>
+            <xyz.le30r.lingualab.event.EventData>AVRO</xyz.le30r.lingualab.event.EventData>
+
+          </schemaTypes>
+          <!-- Dependency mapping -->
+          <references>
+            <xyz.le30r.lingualab.user.event.CreateUserEvent>
+              <reference>
+                <name>xyz.le30r.lingualab.user.event.dto.CreateUserDto</name>
+                <subject>xyz.le30r.lingualab.user.event.dto.CreateUserDto</subject>
+              </reference>
+              <reference>
+                <name>xyz.le30r.lingualab.event.EventData</name>
+                <subject>xyz.le30r.lingualab.event.EventData</subject>
+              </reference>
+            </xyz.le30r.lingualab.user.event.CreateUserEvent>
+          </references>
+        </configuration>
+        <goals>
+          <goal>register</goal>
+        </goals>
+      </plugin>
+    </plugins>
+  </build>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>confluent</id>
+      <name>Confluent</name>
+      <url>https://packages.confluent.io/maven/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+</project>
