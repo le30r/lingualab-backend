@@ -1,11 +1,8 @@
-package xyz.le30r.lingualab.user;
+package xyz.le30r.lingualab.user.entity;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import xyz.le30r.lingualab.auth.entity.Auth;
-
-import java.util.Set;
 
 @Setter
 @Getter
