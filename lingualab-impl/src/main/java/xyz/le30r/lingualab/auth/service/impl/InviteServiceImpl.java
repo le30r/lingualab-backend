@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
 import xyz.le30r.lingualab.auth.entity.Invite;
+import xyz.le30r.lingualab.auth.exception.InviteExpiredException;
 import xyz.le30r.lingualab.auth.mapper.AuthMapper;
 import xyz.le30r.lingualab.auth.repository.InviteRepository;
 import xyz.le30r.lingualab.auth.service.InviteService;
 import xyz.le30r.lingualab.dto.InviteDto;
+import xyz.le30r.lingualab.generic.exception.ObjectNotFoundException;
 
 import java.time.Instant;
 import java.util.Random;
@@ -40,7 +42,13 @@ public class InviteServiceImpl implements InviteService {
 
     @Override
     public InviteDto checkInvite(String inviteLink) {
-        return null;
+        val invite = inviteRepository.findInviteByLink(inviteLink);
+        if (invite.isPresent()) {
+            if (invite.get().getUsages().equals(0) || invite.get().getExpiresAt().isAfter(Instant.now())) {
+               throw new InviteExpiredException();
+            }
+        }
+        return mapper.mapEntityToDto(invite.orElseThrow(ObjectNotFoundException::new));
     }
 
     public static String generateInvitationLink(int length) {

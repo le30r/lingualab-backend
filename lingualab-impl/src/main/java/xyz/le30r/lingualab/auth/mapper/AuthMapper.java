@@ -24,5 +24,4 @@ public interface AuthMapper {
             expression = "java(xyz.le30r.lingualab.generic.utils.DateTimeUtils.toOffsetDateTime(invite.getExpiresAt()))")
     InviteDto mapEntityToDto(Invite invite);
 
-
 }
