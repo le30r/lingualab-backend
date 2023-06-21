@@ -5,6 +5,6 @@ import xyz.le30r.lingualab.dto.AuthDto;
 import xyz.le30r.lingualab.dto.RegisterRequestDto;
 
 public interface AuthService {
-    Auth register(RegisterRequestDto registerRequestDto);
+    Auth register(String inviteLink, RegisterRequestDto registerRequestDto);
     AuthDto getAuth(String username);
 }

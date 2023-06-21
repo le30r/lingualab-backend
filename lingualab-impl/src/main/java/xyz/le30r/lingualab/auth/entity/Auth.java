@@ -1,12 +1,8 @@
 package xyz.le30r.lingualab.auth.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Null;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.jetbrains.annotations.Nullable;
-import xyz.le30r.lingualab.user.User;
-
 import java.time.Instant;
 import java.util.Objects;
 
@@ -19,8 +15,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(name = "auth")
-public
-class Auth {
+public class Auth {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,7 +24,6 @@ class Auth {
     @Enumerated(EnumType.STRING)
     Role role;
     Instant createdAt;
-    @Nullable
     Instant expiresAt;
 
     public boolean equals(Object other) {

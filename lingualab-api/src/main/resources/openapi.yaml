@@ -4,7 +4,7 @@ info:
   description: Lingualab
   version: 1.0.0
 servers:
-  - url: 'localhost:8080'
+  - url: 'http://localhost:8080'
 paths:
   '/api/v1/register':
     post:
@@ -25,6 +25,23 @@ paths:
       responses:
         201:
           description: Ok
+  '/ap1/v1/invite':
+    post:
+      tags:
+        - auth
+      operationId: createInvite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteDto'
+      responses:
+        200:
+          description: Invite created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InviteDto'
   '/api/v1/user/{username}':
     get:
       tags:
@@ -131,6 +148,24 @@ components:
         expires_at:
           type: string
           format: date-time
+
+    InviteDto:
+      type: object
+      properties:
+        invite_link:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        usages:
+          type: integer
+        teacher_id:
+          type: integer
+          format: int64
+
     AuthDto:
       type: object
       properties:

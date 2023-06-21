@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: fix-invite-field
+      author: le30r
+      preConditions:
+        - and:
+            - columnExists:
+                tableName: invite
+                columnName: id
+      changes:
+        - addAutoIncrement:
+            tableName: invite
+            columnName: id

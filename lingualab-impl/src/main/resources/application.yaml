@@ -9,10 +9,12 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     url: 'jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}'
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
 
-
-logging:
-  level:
-    org:
-      springframework:
-        security: TRACE
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: TRACE

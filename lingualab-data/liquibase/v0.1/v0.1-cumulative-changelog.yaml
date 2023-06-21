@@ -8,3 +8,6 @@ databaseChangeLog:
   - include:
       file: v0.1-add-invite-table.yaml
       relativeToChangelogFile: true
+  - include:
+      file: v0.1-fix-invite-field.yaml
+      relativeToChangelogFile: true

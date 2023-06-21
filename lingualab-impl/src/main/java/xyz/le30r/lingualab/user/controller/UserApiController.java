@@ -1,11 +1,11 @@
 package xyz.le30r.lingualab.user.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.RestController;
 import xyz.le30r.lingualab.api.UserApi;
 import xyz.le30r.lingualab.auth.entity.Role;
 import xyz.le30r.lingualab.dto.UserDto;
@@ -15,14 +15,14 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @RequiredArgsConstructor
+@RestController
 public class UserApiController implements UserApi {
 
     private final UserService userService;
 
     @PreAuthorize("#username == authentication.principal.username || hasRole('ADMIN')")
-    @NotNull
     @Override
-    public ResponseEntity<UserDto> getUserByUsername(@NotNull String username) {
+    public ResponseEntity<UserDto> getUserByUsername(String username) {
         return ResponseEntity.ok(userService.getUser(username));
     }
 

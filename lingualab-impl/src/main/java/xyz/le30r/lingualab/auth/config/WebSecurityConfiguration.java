@@ -8,6 +8,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,12 +40,17 @@ class WebSecurityConfiguration {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
+                .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
                         auth
                                 .requestMatchers("/error").permitAll()
-                                .requestMatchers("/swagger-ui/index.html").permitAll()
+                                .requestMatchers("/v3/api-docs/**",
+                                        "/swagger-ui/**",
+                                        "/swagger-ui.html",
+                                        "/actuator/**").permitAll()
                                 .requestMatchers("/api/v1/register").permitAll()
+                                .requestMatchers("/ap1/v1/invite").hasAnyAuthority("TEACHER", "ADMIN")
                                 .requestMatchers("/api/v1/**").authenticated()
                                 .requestMatchers("/**").denyAll()
                 )
